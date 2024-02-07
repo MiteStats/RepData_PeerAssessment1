@@ -1,8 +1,7 @@
 ---
-title: "Reproducible Research: Peer Assessment 1"
-output: 
-  html_document:
-    keep_md: true
+title: "activity"
+output: html_document
+date: "2024-01-07"
 ---
 
 ```{r setup, include=FALSE}
@@ -10,13 +9,21 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-
-## Loading and preprocessing the data
+### Reproducibe research Assignment 1
 This is an R Markdown file for the 1st project of the Reproducible research course in Coursera. 
+
+
+### Data analysis
+In this project we are analysing the data of an individual´s fitbit data from between October and Novermber 2012 in order to divulge patterns of their activity during this period.
+  
+There are 17,568 observations over this period. Each observation has 3 variables 1) date of the measurement 2) no of steps 3) Identifier of the 5 minute interval in which the measurement was taken.
+
+### Loading and processing the data
 
 ```{r}
 unzip("G:/Mi unidad/repdata_data_activity.zip")
 activity<-read.csv("activity.csv")
+
 ```
 
 To view our data
@@ -34,8 +41,7 @@ str(activity)
 ```
 
 
-
-## What is mean total number of steps taken per day?
+### Part 1- What is the mean total number of steps taken a day?
 
 1) Calculate the total number of steps taken per day
 
@@ -66,7 +72,7 @@ summarise(Stepsperday, mean= mean(Stepsperday$steps), median= median(Stepsperday
 The mean no of steps per day is 10766.19 and the median value is 10765
 
 
-## What is the average daily activity pattern?
+### Part 2- What is the average daily activity pattern?
 
 1) Make a time series plot (i.e. type = "l"type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis
 
@@ -96,9 +102,7 @@ print(meansteps[104,])
 
 Using this we can see that the maximum amoung of steps was 206.1698 during the interval 835 of the day
 
-
-
-## Imputing missing values
+### Part 3- Imputing missing values
 
 1) Calculate and report the total number of missing values in the dataset(ie. the total number of rows with NAs)
 
@@ -144,8 +148,7 @@ ggplot(Stepsperday2, aes(x = steps)) +
 The mean steps per day is 10766.19. The median steps per day is 10766.19.
 The value of mean steps per day is the same, while the median steps per day is slightly higher.
 
-
-## Are there differences in activity patterns between weekdays and weekends?
+## Part 4 Are there differences in activity patterns between weekdays and weekends?
 
 1) Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.
 
@@ -163,12 +166,11 @@ activity$wkend<-ifelse(activity$day=="sábado", 1,
             ifelse(activity$day=="viernes",2,0)))))))
 ```
 
-2) Make a plot containing a time series plot (i.e. type = "l"type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). 
+2) Make a panel plot containing a time series plot (i.e. type = "l"type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). See the README file in the GitHub repository to see an example of what this plot should look like using simulated data.
 
 1. Subset the data in to weekdays and weekends
 2. Create a dataset of the steps per interval for both weekdays and weekends
 3. Create a time-series plot of the average no. of steps taken per inteval for weekdays and weekends.
-
 ```{r}
 weekend<-subset(activity, activity$wkend=="1")
 weekday<-subset(activity, activity$wkend=="2")
